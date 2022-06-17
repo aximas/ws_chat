@@ -1,0 +1,18 @@
+.nav {
+  max-width: 180px;
+  width: 100%;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuList {
+  width: 100%;
+}
+
+.menuLink {
+  width: 100%;
+  display: flex;
+}

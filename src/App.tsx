@@ -9,7 +9,7 @@ const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'));
 
 function App() {
     return (
-        <div className="App">
+        <div className="wrapper">
             <Menu/>
             <Routes>
                 <Route path="/" element={<SuspenseComponent><Home/></SuspenseComponent>}/>
