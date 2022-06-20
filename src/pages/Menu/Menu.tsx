@@ -1,34 +1,22 @@
 import {NavLink} from 'react-router-dom';
 import styles from './Menu..module.scss';
+import {MenuItem, Typography} from '@mui/material';
 
-import {Menu, MenuItem} from '@mui/material';
+export const Menu = () => {
 
-
-export const MenuComponent = () => {
-    const checkActiveLink = ({isActive}: { isActive: boolean }) => isActive ? styles.activeMenuLink : styles.menuLink
+    const checkActiveLink = ({isActive}: { isActive: boolean }) => isActive ? styles.activeMenuLink : styles.menuLink;
+    const pages = [{text: 'Home', url: '/'}, {text: 'Chat', url: 'chat'}, {text: 'Login', url: 'login'}];
 
     return <nav className={styles.nav}>
         <ul className={styles.menu}>
-            <li className={styles.menuList}>
-                <NavLink to="/" className={checkActiveLink}>Home</NavLink>
-            </li>
-            <li className={styles.menuList}>
-                <NavLink to="/chat" className={checkActiveLink}>Chat</NavLink>
-            </li>
-            <li className={styles.menuList}>
-                <NavLink to="/login" className={checkActiveLink}>Login</NavLink>
-            </li>
+            {pages.map((page) => (
+                <MenuItem key={page.text}>
+                    <NavLink to={page.url} className={checkActiveLink}>
+                        {page.text}
+                    </NavLink>
+                </MenuItem>
+            ))}
         </ul>
-        <Menu
-            id="basic-menu"
-            open
-            MenuListProps={{
-                'aria-labelledby': 'basic-button',
-            }}
-        >
-            <MenuItem>Profile</MenuItem>
-            <MenuItem>My account</MenuItem>
-            <MenuItem>Logout</MenuItem>
-        </Menu>
+
     </nav>
 }

@@ -1,0 +1,24 @@
+.nav {
+	display: flex;
+	padding: 16px 0;
+}
+
+.navMenu {
+	margin-left: auto;
+}
+
+.homeUrl {
+	display: flex;
+	align-items: center;
+}
+
+.profileMenu {
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity .7s ease-in-out;
+}
+
+.profileMenu.active {
+	visibility: visible;
+	opacity: 1;
+}

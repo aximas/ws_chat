@@ -3,6 +3,7 @@ import {wsChatReducer} from './ws/chat/wsChat.slice';
 
 export const  store = configureStore({
     reducer: {
+        // auth:
         wsChat: wsChatReducer
     }
 })
