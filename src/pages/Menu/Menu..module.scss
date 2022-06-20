@@ -1,5 +1,4 @@
 .nav {
-  max-width: 180px;
   width: 100%;
 }
 
@@ -15,4 +14,8 @@
 .menuLink {
   width: 100%;
   display: flex;
+}
+
+.activeMenuLink {
+  color: greenyellow;
 }
