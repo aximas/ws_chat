@@ -5,5 +5,4 @@ export const API = {
         me: `${baseURL}auth/me`,
         login: `${baseURL}auth/login`,
     },
-
 }

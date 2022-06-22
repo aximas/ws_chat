@@ -15,8 +15,6 @@ export const Messages = () => {
         })
     }, [])
 
-    console.log('wsChat', wsChat);
-
     return <div className={styles.messages}>
         {messages?.map((message: any, i: number) => <Message messages={message} key={i}/>)}
     </div>
