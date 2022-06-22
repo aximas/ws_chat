@@ -1,11 +1,15 @@
 import {NavLink} from 'react-router-dom';
 import styles from './Menu..module.scss';
 import {MenuItem, Typography} from '@mui/material';
+import {useAppSelector} from '../../core/utils/hooks/useAppDispatch';
 
 export const Menu = () => {
+    const [isLogged] = useAppSelector(({auth}) => [auth.isLogged]);
 
     const checkActiveLink = ({isActive}: { isActive: boolean }) => isActive ? styles.activeMenuLink : styles.menuLink;
-    const pages = [{text: 'Home', url: '/'}, {text: 'Chat', url: 'chat'}, {text: 'Login', url: 'login'}];
+    let pages = [{text: 'Home', url: '/'}, {text: 'Chat', url: 'chat'}, {text: 'Login', url: 'login'}];
+
+    if (isLogged) pages = [{text: 'Home', url: '/'}, {text: 'Chat', url: 'chat'}];
 
     return <nav className={styles.nav}>
         <ul className={styles.menu}>

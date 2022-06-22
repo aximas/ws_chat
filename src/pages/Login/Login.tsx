@@ -3,19 +3,23 @@ import styles from './Login.module.scss';
 
 import {Button, FormControl, InputLabel, Input, FormHelperText} from '@mui/material';
 import {LoginService} from '../../core/services/auth/login';
+import {loginThunk} from '../../core/store/auth/auth.thunk';
+import {useAppDispatch} from '../../core/utils/hooks/useAppDispatch';
 
 
 const Login: React.FC = () => {
     // React hooks
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const dispatch = useAppDispatch();
 
     // Handlers
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         const loginResponse = await LoginService.post(email, password);
-        console.log('loginResponse', loginResponse);
+
+        if (loginResponse.resultCode === 0) dispatch(loginThunk());
     }
 
     return <form className={styles.loginForm} onSubmit={onSubmitHandler}>
@@ -27,7 +31,8 @@ const Login: React.FC = () => {
         </FormControl>
         <FormControl margin="normal">
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input type="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+            <Input type="password" id="password" autoComplete="on" onChange={(e) => setPassword(e.target.value)}
+                   value={password}/>
         </FormControl>
         <Button type="submit">Submit</Button>
     </form>

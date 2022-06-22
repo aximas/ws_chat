@@ -1,9 +1,26 @@
 import {API} from '../../config/api';
-import {store} from '../../store/store';
-import {setAuthData, setLogged} from '../../store/auth/auth.slice';
-import {RequestBody} from "./login.types";
+import {RequestBody} from './login.types';
 
 export const LoginService = {
+    async get() {
+        const response = await fetch(API.auth.me, {
+            credentials: 'include',
+        });
+        console.log('res', response);
+        if (!response.ok) return console.log(response.json());
+
+        const result: {
+            resultCode: number
+            messages: [],
+            data: {
+                id: number,
+                email: string,
+                login: string
+            }
+        } = await response.json();
+        console.log('result', result);
+        if (result.resultCode === 0) return result.data
+    },
     async post(email, password) {
 
         const reqBody: RequestBody = {
@@ -24,9 +41,8 @@ export const LoginService = {
             if (!response.ok) return console.log(response.json());
 
             return response.json();
-            // store.dispatch(setAuthData(true));
         } catch (e) {
-
+            console.log(e.name);
         }
     }
 }

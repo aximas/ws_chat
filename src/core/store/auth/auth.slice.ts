@@ -16,6 +16,7 @@ const authSlice = createSlice({
             return {...state, isLogged: action.payload}
         },
         setAuthData: (state, action: PayloadAction<AuthTypes>) => {
+            console.log('action.payload', action.payload);
             return {...state, ...action.payload}
         }
     }
