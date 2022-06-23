@@ -10,7 +10,7 @@ export const Header = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (!isLoggedFromSite) dispatch(authThunk());
+        if (!isLoggedFromSite) dispatch(authThunk({isReqFromHeader: true}));
     }, [])
 
     return <header className={styles.header}>

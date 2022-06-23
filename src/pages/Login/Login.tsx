@@ -21,7 +21,7 @@ const Login: React.FC = () => {
 
         if (loginResponse.resultCode === 0) {
             await dispatch(loginThunk());
-            await dispatch(authThunk());
+            await dispatch(authThunk({isReqFromHeader: false}));
         }
     }
 

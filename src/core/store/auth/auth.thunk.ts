@@ -7,21 +7,34 @@ export const loginThunk = createAsyncThunk('auth/login', async (_, thunkAPI) => 
     thunkAPI.dispatch(setLogged(true));
 });
 
-export const authThunk = createAsyncThunk('auth/setAuth', async (_, thunkAPI) => {
-    const res = await LoginService.get();
+export const authThunk = createAsyncThunk<void, { isReqFromHeader: boolean }>(
+    'auth/setAuth',
+    async (payload, thunkAPI) => {
 
-    if (res) {
-        thunkAPI.dispatch(setLoggedFromSite(true));
-        thunkAPI.dispatch(setLogged(true));
-        thunkAPI.dispatch(setAuthData(res));
-    } else {
-        thunkAPI.dispatch(addAlert({
-            text: `For full login please do login in https://social-network.samuraijs.com/`,
-            type: 'info',
-            isSubmit: true
-        }));
-    }
-});
+        const res = await LoginService.get();
+
+        if (payload.isReqFromHeader) {
+            if (res) {
+                thunkAPI.dispatch(setLoggedFromSite(true));
+                thunkAPI.dispatch(setLogged(true));
+                thunkAPI.dispatch(setAuthData(res));
+            }
+        } else {
+            if (res) {
+                thunkAPI.dispatch(setLoggedFromSite(true));
+                thunkAPI.dispatch(setLogged(true));
+                thunkAPI.dispatch(setAuthData(res));
+            } else {
+                thunkAPI.dispatch(addAlert({
+                    text: `For full login please do login in https://social-network.samuraijs.com/`,
+                    type: 'info',
+                    isSubmit: true
+                }));
+            }
+        }
+
+
+    });
 
 export const logoutThunk = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     const res = await LoginService.delete();
@@ -35,5 +48,4 @@ export const logoutThunk = createAsyncThunk('auth/logout', async (_, thunkAPI) =
             login: ''
         }));
     }
-    console.log('res Logout', res);
 })
