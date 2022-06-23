@@ -1,19 +1,17 @@
 import cn from 'classnames';
 import styles from './Alert.module.scss';
-import {alertProps, AlertProps} from './Alert.props';
+import {AlertProps} from './Alert.props';
 import {Button} from '@mui/material';
+import {useAppDispatch, useAppSelector} from '../../../core/utils/hooks/useAppDispatch';
+import {removeAlertAction} from '../../../core/store/alert/alert.slice';
 
 export const Alert = ({className}: AlertProps) => {
 
-    const alert: alertProps[] = [{
-        id: '23',
-        text: 'Heye it is alert',
-        type: 'info',
-        isSubmit: false
-    }];
+    const [alert] = useAppSelector(({alert}) => [alert])
+    const dispatch = useAppDispatch();
 
     const handleClick = (id: string) => () => {
-
+        dispatch(removeAlertAction(id));
     }
 
     const renderNotifications = () => {
@@ -22,9 +20,9 @@ export const Alert = ({className}: AlertProps) => {
                  aria-live="polite"
                  aria-atomic="true">
                 <p className={styles.content}>{item.text}</p>
-                {item.isSubmit && (<Button onClick={handleClick(item.id)}>
+                {item.isSubmit && (<button onClick={handleClick(item.id)} className={styles.alertButton}>
                     X
-                </Button>)}
+                </button>)}
             </div>
         ))
     }

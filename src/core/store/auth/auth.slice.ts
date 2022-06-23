@@ -5,7 +5,8 @@ export const initialState: AuthTypes = {
     id: 0,
     email: '',
     login: '',
-    isLogged: false
+    isLogged: false,
+    isLoggedFromSite: false
 }
 
 const authSlice = createSlice({
@@ -16,14 +17,16 @@ const authSlice = createSlice({
             return {...state, isLogged: action.payload}
         },
         setAuthData: (state, action: PayloadAction<AuthTypes>) => {
-            console.log('action.payload', action.payload);
             return {...state, ...action.payload}
+        },
+        setLoggedFromSite: (state, action: PayloadAction<boolean>) => {
+            return {...state, isLoggedFromSite: action.payload}
         }
     }
 });
 
 export const {
     actions: {
-        setLogged, setAuthData
+        setLogged, setAuthData, setLoggedFromSite
     }, reducer: authReducer
 } = authSlice;

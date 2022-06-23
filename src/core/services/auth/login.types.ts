@@ -4,3 +4,13 @@ export type RequestBody = {
     rememberMe: boolean;
     captcha?: boolean;
 }
+
+export type GetResponse = {
+    resultCode: number
+    messages: [],
+    data: {
+        id: number,
+        email: string,
+        login: string
+    }
+}

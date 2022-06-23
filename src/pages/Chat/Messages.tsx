@@ -10,7 +10,6 @@ export const Messages = () => {
 
     useEffect(() => {
         wsChannel.addEventListener('message', (e) => {
-            console.log('twice', e);
             setMessages(prevState => [...prevState, ...JSON.parse(e.data)])
         })
     }, [])

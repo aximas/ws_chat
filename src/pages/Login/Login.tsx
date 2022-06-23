@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Login.module.scss';
 
 import {Button, FormControl, InputLabel, Input, FormHelperText} from '@mui/material';
 import {LoginService} from '../../core/services/auth/login';
-import {loginThunk} from '../../core/store/auth/auth.thunk';
+import {authThunk, loginThunk} from '../../core/store/auth/auth.thunk';
 import {useAppDispatch} from '../../core/utils/hooks/useAppDispatch';
 
 
@@ -11,15 +11,18 @@ const Login: React.FC = () => {
     // React hooks
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+
     const dispatch = useAppDispatch();
 
     // Handlers
     const onSubmitHandler = async (e) => {
         e.preventDefault();
-
         const loginResponse = await LoginService.post(email, password);
 
-        if (loginResponse.resultCode === 0) dispatch(loginThunk());
+        if (loginResponse.resultCode === 0) {
+            await dispatch(loginThunk());
+            await dispatch(authThunk());
+        }
     }
 
     return <form className={styles.loginForm} onSubmit={onSubmitHandler}>

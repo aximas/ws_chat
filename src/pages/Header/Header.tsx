@@ -3,12 +3,15 @@ import {NavLink} from 'react-router-dom';
 import {ProfileMenu} from './ProfileMenu';
 import {useAppDispatch, useAppSelector} from '../../core/utils/hooks/useAppDispatch';
 import {authThunk} from '../../core/store/auth/auth.thunk';
+import {useEffect} from 'react';
 
 export const Header = () => {
-    const [isLogged] = useAppSelector(({auth}) => [auth.isLogged]);
+    const [isLoggedFromSite] = useAppSelector(({auth}) => [auth.isLoggedFromSite]);
     const dispatch = useAppDispatch();
 
-    if (!isLogged) dispatch(authThunk());
+    useEffect(() => {
+        if (!isLoggedFromSite) dispatch(authThunk());
+    }, [])
 
     return <header className={styles.header}>
         <nav className={styles.nav}>
