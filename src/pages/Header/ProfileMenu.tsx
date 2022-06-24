@@ -7,7 +7,7 @@ import {NavLink} from 'react-router-dom';
 import cn from 'classnames';
 import {useOnClickOutside} from '../../core/utils/hooks/useOnClickOutside';
 import {useAppDispatch, useAppSelector} from '../../core/utils/hooks/useAppDispatch';
-import {logoutThunk} from '../../core/store/auth/auth.thunk';
+import {logoutThunk} from '../../core/store/auth/auth.thunks';
 
 
 export const ProfileMenu = () => {
@@ -38,7 +38,7 @@ export const ProfileMenu = () => {
                 <NavLink to="/friends">Friends</NavLink>
             </li>
             <li>
-                <button onClick={handleLogout}>Log out</button>
+                <button onClick={handleLogout} className={styles.logoutBtn}>Log out</button>
             </li>
         </ul>
     </div>

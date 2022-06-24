@@ -2,7 +2,7 @@ import styles from './Header.module.scss';
 import {NavLink} from 'react-router-dom';
 import {ProfileMenu} from './ProfileMenu';
 import {useAppDispatch, useAppSelector} from '../../core/utils/hooks/useAppDispatch';
-import {authThunk} from '../../core/store/auth/auth.thunk';
+import {authThunks} from '../../core/store/auth/auth.thunks';
 import {useEffect} from 'react';
 
 export const Header = () => {
@@ -10,7 +10,7 @@ export const Header = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (!isLoggedFromSite) dispatch(authThunk({isReqFromHeader: true}));
+        if (!isLoggedFromSite) dispatch(authThunks({isReqFromHeader: true}));
     }, [])
 
     return <header className={styles.header}>

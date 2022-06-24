@@ -7,6 +7,7 @@ import {Header} from './pages/Header/Header';
 import {useAppSelector} from './core/utils/hooks/useAppDispatch';
 import {Navigate} from 'react-router';
 import {Alert} from './components/MainComponents/Alert/Alert';
+import {Friends} from './pages/Friends/Friends';
 
 const Home = React.lazy(() => import('./pages/Home/Home'));
 const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'));
@@ -19,7 +20,7 @@ function App() {
 
     return (
         <div className="wrapper">
-            <Alert />
+            <Alert/>
             <header className="header">
                 <Header/>
             </header>
@@ -28,10 +29,14 @@ function App() {
             </aside>
             <main className="main">
                 <Routes>
-                    {isLogged ? (<>
-                        <Route path="/" element={<SuspenseComponent><Home/></SuspenseComponent>}/>
-                        <Route path="/chat" element={<SuspenseComponent><ChatPage/></SuspenseComponent>}/>
-                    </>) : <Route path="/login" element={<SuspenseComponent><Login/></SuspenseComponent>}/>}
+                    {isLogged ?
+                        (<>
+                            <Route path="/" element={<SuspenseComponent><Home/></SuspenseComponent>}/>
+                            <Route path="/chat" element={<SuspenseComponent><ChatPage/></SuspenseComponent>}/>
+                            <Route path="/friends" element={<SuspenseComponent><Friends/></SuspenseComponent>}/>
+
+                        </>)
+                        : <Route path="/login" element={<SuspenseComponent><Login/></SuspenseComponent>}/>}
                     <Route path="*" element={<Navigate to={_redirectPage} replace/>}/>
                 </Routes>
             </main>

@@ -1,13 +1,13 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {LoginService} from '../../services/auth/login';
 import {setAuthData, setLogged, setLoggedFromSite} from './auth.slice';
-import {addAlert} from '../alert/alert.thunk';
+import {addAlert} from '../alert/alert.thunks';
 
 export const loginThunk = createAsyncThunk('auth/login', async (_, thunkAPI) => {
     thunkAPI.dispatch(setLogged(true));
 });
 
-export const authThunk = createAsyncThunk<void, { isReqFromHeader: boolean }>(
+export const authThunks = createAsyncThunk<void, { isReqFromHeader: boolean }>(
     'auth/setAuth',
     async (payload, thunkAPI) => {
 
@@ -26,7 +26,7 @@ export const authThunk = createAsyncThunk<void, { isReqFromHeader: boolean }>(
                 thunkAPI.dispatch(setAuthData(res));
             } else {
                 thunkAPI.dispatch(addAlert({
-                    text: `For full login please do login in https://social-network.samuraijs.com/`,
+                    text: `For full login please do login in <a href="https://social-network.samuraijs.com" target="_blank" rel='noopener noreferrer'>this site</a>`,
                     type: 'info',
                     isSubmit: true
                 }));

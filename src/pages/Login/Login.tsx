@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './Login.module.scss';
 
 import {Button, FormControl, InputLabel, Input, FormHelperText} from '@mui/material';
 import {LoginService} from '../../core/services/auth/login';
-import {authThunk, loginThunk} from '../../core/store/auth/auth.thunk';
+import {authThunks, loginThunk} from '../../core/store/auth/auth.thunks';
 import {useAppDispatch} from '../../core/utils/hooks/useAppDispatch';
+import {addAlert} from '../../core/store/alert/alert.thunks';
 
 
 const Login: React.FC = () => {
@@ -21,7 +22,12 @@ const Login: React.FC = () => {
 
         if (loginResponse.resultCode === 0) {
             await dispatch(loginThunk());
-            await dispatch(authThunk({isReqFromHeader: false}));
+            await dispatch(authThunks({isReqFromHeader: false}));
+        } else {
+            dispatch(addAlert({
+                text: `${loginResponse.messages.length ? loginResponse.messages.join(' ') : 'something working wrong'}`,
+                type: 'info',
+            }));
         }
     }
 

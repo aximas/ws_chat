@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {alertProps} from '../../../components/MainComponents/Alert/Alert.props';
-import {addAlert} from './alert.thunk';
+import {addAlert} from './alert.thunks';
 
 const initialState: alertProps[] = [];
 
