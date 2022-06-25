@@ -3,8 +3,8 @@ export type Friend = {
     name: string,
     status: string | null,
     photos: {
-        small: string,
-        large: string
+        small: string | null,
+        large: string | null
     },
     followed: boolean
 }

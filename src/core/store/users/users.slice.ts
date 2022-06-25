@@ -15,3 +15,5 @@ const usersSlice = createSlice({
         }
     }
 })
+
+export const {actions: {setUsers}, reducer: usersReducer} = usersSlice;

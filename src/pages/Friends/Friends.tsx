@@ -1,34 +1,20 @@
 import {FriendComponent} from './FriendComponent';
 import {FriendData} from './Friends.props';
-
-const friends: FriendData[] = [{
-    items: [
-        {
-            'name': 'Shubert',
-            'id': 1,
-            'photos': {
-                'small': null,
-                'large': null
-            },
-            'status': null,
-            'followed': false
-        },
-        {
-            'name': 'Hacker',
-            'id': 2,
-            'photos': {
-                'small': null,
-                'large': null
-            },
-            'status': null,
-            'followed': false
-        }
-    ],
-    totalCount: 30,
-}]
+import {useAppDispatch, useAppSelector} from "../../core/utils/hooks/useAppDispatch";
+import {usersThunk} from "../../core/store/users/users.thunks";
+import {useEffect} from "react";
+import styles from './Friends.module.scss';
 
 export const Friends = () => {
-    return <div>
-        <FriendComponent friends={friends[0].items}/>
+    const [users, totalCount] = useAppSelector(({users}) => [users.items, users.totalCount]);
+    const dispatch = useAppDispatch();
+
+
+    useEffect(() => {
+        dispatch(usersThunk({queryParams: ''}));
+    }, []);
+
+    return <div className={styles.users}>
+        <FriendComponent users={users}/>
     </div>
 }
