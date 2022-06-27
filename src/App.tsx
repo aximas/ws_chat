@@ -12,6 +12,7 @@ import {Friends} from './pages/Friends/Friends';
 const Home = React.lazy(() => import('./pages/Home/Home'));
 const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'));
 const Login = React.lazy(() => import('./pages/Login/Login'));
+const Users = React.lazy(() => import('./pages/Users/Users'));
 
 function App() {
     const [isLogged] = useAppSelector(({auth}) => [auth.isLogged]);
@@ -34,7 +35,7 @@ function App() {
                             <Route path="/" element={<SuspenseComponent><Home/></SuspenseComponent>}/>
                             <Route path="/chat" element={<SuspenseComponent><ChatPage/></SuspenseComponent>}/>
                             <Route path="/friends" element={<SuspenseComponent><Friends/></SuspenseComponent>}/>
-
+                            <Route path="/users" element={<SuspenseComponent><Users/></SuspenseComponent>}/>
                         </>)
                         : <Route path="/login" element={<SuspenseComponent><Login/></SuspenseComponent>}/>}
                     <Route path="*" element={<Navigate to={_redirectPage} replace/>}/>

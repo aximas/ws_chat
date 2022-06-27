@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {FriendData} from '../../../pages/Friends/Friends.props';
+import {UserData} from "../../../pages/Users/Users.props";
 
-const initialState: FriendData = {
+const initialState: UserData = {
     items: [],
     totalCount: 0
 }
@@ -10,7 +10,7 @@ const usersSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        setUsers: (state, action: PayloadAction<FriendData>) => {
+        setUsers: (state, action: PayloadAction<UserData>) => {
             return {...state, items: action.payload.items, totalCount: action.payload.totalCount}
         }
     }

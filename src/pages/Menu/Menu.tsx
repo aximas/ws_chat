@@ -9,7 +9,7 @@ export const Menu = () => {
     const checkActiveLink = ({isActive}: { isActive: boolean }) => isActive ? styles.activeMenuLink : styles.menuLink;
     let pages = [{text: 'Home', url: '/'}, {text: 'Chat', url: 'chat'}, {text: 'Login', url: 'login'}];
 
-    if (isLogged) pages = [{text: 'Home', url: '/'}, {text: 'Chat', url: 'chat'}];
+    if (isLogged) pages = [{text: 'Home', url: '/'}, {text: 'Chat', url: 'chat'}, {text: 'Users', url: 'users'}];
 
     return <nav className={styles.nav}>
         <ul className={styles.menu}>

@@ -26,17 +26,21 @@ export const ProfileMenu = () => {
         if (isLogged || isLoggedFromSite) dispatch(logoutThunk());
     }
 
+    const profileMenuLinks = [
+        {name: 'Profile', link: '/profile'},
+        {name: 'Friends', link: '/friends'},
+    ]
+
     return <div className={styles.profileMenuWrapper} ref={ref}>
         <Button onClick={handleClick}>
             <SvgIcon Icon={UserIcon}/>
         </Button>
         <ul className={cn(styles.profileMenu, {[styles.active]: isOpen})}>
-            <li>
-                <NavLink to="/profile">Profile</NavLink>
-            </li>
-            <li>
-                <NavLink to="/friends">Friends</NavLink>
-            </li>
+            {profileMenuLinks.map((menu, i) => {
+                return <li key={i}>
+                    <NavLink to={menu.link} onClick={() => setIsOpen(false)}>{menu.name}</NavLink>
+                </li>
+            })}
             <li>
                 <button onClick={handleLogout} className={styles.logoutBtn}>Log out</button>
             </li>

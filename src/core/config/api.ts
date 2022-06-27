@@ -6,6 +6,7 @@ export const API = {
         login: `${baseURL}auth/login`,
     },
     users: {
-        get: `${baseURL}users`
+        get: `${baseURL}users`,
+        follow: `${baseURL}follow`,
     }
 }

@@ -1,4 +1,4 @@
-export type Friend = {
+export type User = {
     id: number,
     name: string,
     status: string | null,
@@ -9,7 +9,7 @@ export type Friend = {
     followed: boolean
 }
 
-export type FriendData = {
-    items: Friend[],
+export type UserData = {
+    items: User[],
     totalCount: number,
 }
